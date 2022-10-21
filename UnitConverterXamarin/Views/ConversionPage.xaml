@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:UnitConverterXamarin.ViewModels"
-             xmlns:md="clr-namespace:UnitConverterXamarin.Views"
+             xmlns:views="clr-namespace:UnitConverterXamarin.Views"
+             xmlns:md="clr-namespace:UnitConverterXamarin.Models"
              x:Class="UnitConverterXamarin.Views.ConversionPage"
              >
 
@@ -13,7 +14,24 @@
     
     <ContentPage.Content>
         <StackLayout>
-            
+            <Grid x:Name="inputGrid" ColumnDefinitions="*, Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+                <Label Text="Input Value" HorizontalOptions="Center"/>
+                <Label Text="Prefix" Grid.Column="1" HorizontalOptions="Center"/>
+                <Label Text="Unit" Grid.Column="2" HorizontalOptions="Center"/>
+                <Entry x:Name="convValueEntry" Grid.Row="1" HorizontalTextAlignment="Center" Text="{Binding InputValue}"/>
+                <Picker x:Name="convPrefixPicker" Grid.Column="1" Grid.Row="1" ItemsSource="{x:Static md:Prefixes.PrefixList}" SelectedIndex="{Binding InputPrefix, Mode=TwoWay}"/>
+                <StackLayout x:Name="convUnitStack" Grid.Column="2" Grid.Row="1" HeightRequest="{Binding Path=Height, Source={x:Reference convValueEntry}}">
+                    <Entry x:Name="convUnitEntry"  HorizontalTextAlignment="Center" Text="{Binding InputUnitStr}"/>
+                    <!--ListView x:Name="convPossibleUnitList" ItemsSource="{Binding ConversionPossibleUnits}"/-->
+                </StackLayout>
+                
+                
+                
+            </Grid>
+            <Rectangle HeightRequest="5" HorizontalOptions="StartAndExpand"/>
+            <ListView ItemsSource="{Binding ObservableResults}">
+                
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
