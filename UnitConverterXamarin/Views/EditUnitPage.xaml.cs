@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using UnitConverterXamarin.ViewModels;
 using UnitConverterXamarin.Models;
 using Xamarin.Forms;
@@ -11,15 +12,12 @@ using Xamarin.Forms.Xaml;
 namespace UnitConverterXamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ConversionPage : ContentPage
+    public partial class EditUnitPage : ContentPage
     {
-        public ConversionPage()
+        public EditUnitPage()
         {
             InitializeComponent();
-            viewModel = this.BindingContext as ConversionViewModel;
         }
-
-        private ConversionViewModel viewModel;
 
         private async void Entry_Focused(object sender, FocusEventArgs e)
         {
@@ -31,19 +29,7 @@ namespace UnitConverterXamarin.Views
 
         private void mainAbsoluteLayout_SizeChanged(object sender, EventArgs e)
         {
-            AbsoluteLayout.SetLayoutBounds(convPossibleUnitList, new Rectangle(convUnitEntry.X, convUnitEntry.Y + convUnitEntry.Height, convUnitEntry.Width, 300));
-        }
-
-        private void resultPrefixPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var picker = sender as Picker;
-            var selectedPrefix = (sender as Picker).SelectedItem;
-            if (selectedPrefix != null)
-            {
-                viewModel.UpdateResultPrefix(picker.Parent.BindingContext as VariableWithUnit, selectedPrefix as string);
-            }
+            AbsoluteLayout.SetLayoutBounds(editUnitPossibleList, new Rectangle(editUnitInput.X, editUnitInput.Y + editUnitInput.Height, editUnitInput.Width, 300));
         }
     }
-
-    
 }

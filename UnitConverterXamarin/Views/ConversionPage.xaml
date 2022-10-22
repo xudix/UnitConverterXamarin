@@ -8,30 +8,58 @@
              >
 
     <ContentPage.BindingContext>
-        <!--StaticResource Key="convViewModel"/-->
-        <vm:ConversionViewModel x:Name="convViewModel"/>
+        <StaticResource Key="convViewModel"/>
+        <!--<vm:ConversionViewModel x:Name="convViewModel"/>-->
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Grid x:Name="inputGrid" ColumnDefinitions="*, Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
-                <Label Text="Input Value" HorizontalOptions="Center"/>
-                <Label Text="Prefix" Grid.Column="1" HorizontalOptions="Center"/>
-                <Label Text="Unit" Grid.Column="2" HorizontalOptions="Center"/>
-                <Entry x:Name="convValueEntry" Grid.Row="1" HorizontalTextAlignment="Center" Text="{Binding InputValue}"/>
-                <Picker x:Name="convPrefixPicker" Grid.Column="1" Grid.Row="1" ItemsSource="{x:Static md:Prefixes.PrefixList}" SelectedIndex="{Binding InputPrefix, Mode=TwoWay}"/>
-                <StackLayout x:Name="convUnitStack" Grid.Column="2" Grid.Row="1" HeightRequest="{Binding Path=Height, Source={x:Reference convValueEntry}}">
-                    <Entry x:Name="convUnitEntry"  HorizontalTextAlignment="Center" Text="{Binding InputUnitStr}"/>
-                    <!--ListView x:Name="convPossibleUnitList" ItemsSource="{Binding ConversionPossibleUnits}"/-->
-                </StackLayout>
-                
-                
-                
-            </Grid>
-            <Rectangle HeightRequest="5" HorizontalOptions="StartAndExpand"/>
-            <ListView ItemsSource="{Binding ObservableResults}">
-                
-            </ListView>
-        </StackLayout>
+        <AbsoluteLayout x:Name="mainAbsoluteLayout" SizeChanged="mainAbsoluteLayout_SizeChanged">
+            <StackLayout >
+                <Grid x:Name="inputGrid" ColumnDefinitions="*, Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+                    <Label Text="Input Value" HorizontalOptions="Center" />
+                    <Label Text="Prefix" Grid.Column="1" HorizontalOptions="Center"/>
+                    <Label Text="Unit" Grid.Column="2" HorizontalOptions="Center"/>
+                    <Entry x:Name="convValueEntry" Grid.Row="1" HorizontalTextAlignment="Center" Text="{Binding InputValue}" Focused="Entry_Focused"/>
+                    <Picker x:Name="convPrefixPicker" Grid.Column="1" Grid.Row="1" ItemsSource="{x:Static md:Prefixes.PrefixList}" SelectedIndex="{Binding InputPrefix, Mode=TwoWay}"/>
+                    <Label Text="Expression" Grid.Row="2" Grid.ColumnSpan="3" HorizontalTextAlignment="Center" />
+                    <Entry x:Name="convExpInput" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding ConversionExpression, Mode=TwoWay}" HorizontalTextAlignment="Center" Focused="Entry_Focused"/>
+                    <Label Text="Result" Grid.Row="4" HorizontalTextAlignment="Center"/>
+                    <Label Text="Convert to Unit (Expression)" Grid.Column="2" Grid.Row="4" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="convCustomConvResultOutput" Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding CustomConversionResult}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                    <Entry x:Name="convCustomConvUnitInput" Grid.Column="2" Grid.Row="5" Text="{Binding CustomConversionUnitExpression, Mode=TwoWay}" Focused="Entry_Focused"/>
+                    <Entry x:Name="convUnitEntry" Grid.Column="2" Grid.Row="1" HorizontalTextAlignment="Center" Text="{Binding InputUnitStr}"/>
+                    <!--StackLayout x:Name="convUnitStack" Grid.Column="2" Grid.Row="1" HeightRequest="{Binding Path=Height, Source={x:Reference convExpInput}}">
+                        <Entry x:Name="convUnitEntry"  HorizontalTextAlignment="Center" Text="{Binding InputUnitStr}"/>
+                        
+                    </StackLayout-->
+
+                </Grid>
+                <Rectangle HeightRequest="5" HorizontalOptions="StartAndExpand"/>
+                <Grid x:Name="result_Header" ColumnDefinitions="*, Auto, *" RowDefinitions="Auto">
+                    <Label Text="Value" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="result_Prefix_Label" Text="Prefix" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                    <Label Text="Unit" Grid.Column="2" HorizontalTextAlignment="Center" />
+                </Grid>
+                <ListView ItemsSource="{Binding ObservableResults}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowDefinitions="Auto">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Value, StringFormat=\{0:G6\}}" HorizontalTextAlignment="Center"/>
+                                    <Picker x:Name="resultPrefixPicker" Grid.Column="1" ItemsSource="{x:Static md:Prefixes.PrefixList}" SelectedIndexChanged="resultPrefixPicker_SelectedIndexChanged" SelectedItem="{Binding Prefix, Mode=OneWay}"/>
+                                    <Label Text="{Binding Unit}" Grid.Column="2" HorizontalTextAlignment="Start"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <ListView x:Name="convPossibleUnitList" ItemsSource="{Binding ConversionPossibleUnits}" IsVisible="{Binding Path=IsFocused, Source={x:Reference convUnitEntry}}"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

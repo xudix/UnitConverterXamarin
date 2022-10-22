@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:UnitConverterXamarin.ViewModels"
+             xmlns:views="clr-namespace:UnitConverterXamarin.Views"
+             xmlns:md="clr-namespace:UnitConverterXamarin.Models"
+             x:Class="UnitConverterXamarin.Views.EditUnitPage">
+
+
+    <ContentPage.BindingContext>
+        <StaticResource Key="convViewModel"/>
+    </ContentPage.BindingContext>
+    
+    <!--<ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="End"/>
+            <Setter Property="Padding" Value="5"/>
+            --><!--<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />--><!--
+        </Style>
+    </ContentPage.Resources>-->
+    <ContentPage.Content>
+        <AbsoluteLayout x:Name="mainAbsoluteLayout" SizeChanged="mainAbsoluteLayout_SizeChanged">
+            <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Always" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+                        <Label Text="Select from Existing"/>
+                        <Label Text="Measure" Grid.Row="1" />
+                        <Label Text="Unit Symbol" Grid.Row="2" />
+                        <Label Text="Unit Name" Grid.Row="3" />
+                        <Label Text="Expression" Grid.Row="4" />
+                        <Entry x:Name="editUnitInput" Grid.Column="1" Text="{Binding EditTabUnitStr}"/>
+                        <!--<StackLayout Grid.Column="1" Grid.Row="0"  >
+                            <Entry x:Name="edit_Unit_Input" Text="{Binding EditTabUnitStr}" Focused="Edit_Unit_Input_FocusChanged" Unfocused="Edit_Unit_Input_FocusChanged"/>
+                            <ListView x:Name="edit_Unit_Possible_List" ItemsSource="{Binding EditTabPossibleUnits}" ItemSelected="edit_Unit_Possible_List_ItemSelected" MaximumHeightRequest="150" VerticalScrollBarVisibility="Default" IsVisible="false">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell Text="{Binding}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            Picker x:Name="conv_Unit_Possible_List" ItemsSource="{Binding PossibleDisplayUnits}" SelectedIndexChanged="conv_Unit_Possible_List_SelectedIndexChanged" HorizontalOptions="CenterAndExpand"/
+                        </StackLayout>-->
+                        <Entry x:Name="editMeasureInput" Text="{Binding EditTabUnit.MeasureName, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
+                        <Entry x:Name="editSymbolInput" Text="{Binding EditTabUnit.UnitSymbol, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"/>
+                        <Entry x:Name="editUnitNameInput" Text="{Binding EditTabUnit.UnitName, Mode=TwoWay}" Grid.Column="1" Grid.Row="3"/>
+                        <Entry x:Name="editExpressionInput" Text="{Binding EditTabExpression, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Focused="Entry_Focused"/>
+                    </Grid>
+                    <Rectangle HeightRequest="5" HorizontalOptions="StartAndExpand"/>
+                    <Label Text="Definition Parameters:" HorizontalTextAlignment="Center"/>
+                    <Grid ColumnDefinitions="Auto, *, Auto, *" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                        <Label Grid.Column="0" Grid.Row="0" Text="Multiplier" />
+                        <Entry Grid.Column="1" Grid.Row="0" Text="{Binding EditTabUnit.Multiplier, Mode=TwoWay}" />
+                        <Label Grid.Column="2" Grid.Row="0" Text="Offset" />
+                        <Entry Grid.Column="3" Grid.Row="0" Text="{Binding EditTabUnit.Offset, Mode=TwoWay}"  />
+                        <Label Grid.Row="1" Text="Powers of Base Quantities:"  Grid.ColumnSpan="4" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Time" />
+                        <Entry Grid.Column="1" Grid.Row="2" Text="{Binding EditTabUnit.PowerOfTime, Mode=TwoWay}"  />
+                        <Label Grid.Column="2" Grid.Row="2" Text="Length" />
+                        <Entry Grid.Column="3" Grid.Row="2" Text="{Binding EditTabUnit.PowerOfLength, Mode=TwoWay}"  />
+                        <Label Grid.Column="0" Grid.Row="3" Text="Mass" />
+                        <Entry Grid.Column="1" Grid.Row="3" Text="{Binding EditTabUnit.PowerOfMass, Mode=TwoWay}"  />
+                        <Label Grid.Column="2" Grid.Row="3" Text="Temperature" />
+                        <Entry Grid.Column="3" Grid.Row="3" Text="{Binding EditTabUnit.PowerOfTemperature, Mode=TwoWay}"  />
+                        <Label Grid.Column="0" Grid.Row="4" Text="Amount of Substance" />
+                        <Entry Grid.Column="1" Grid.Row="4" Text="{Binding EditTabUnit.PowerOfSubstanceAmount, Mode=TwoWay}"  />
+                        <Label Grid.Column="2" Grid.Row="4" Text="Electric Current" />
+                        <Entry Grid.Column="3" Grid.Row="4" Text="{Binding EditTabUnit.PowerOfCurrent, Mode=TwoWay}"  />
+                        <Label Grid.Column="0" Grid.Row="5" Text="Luminous Intensity" />
+                        <Entry Grid.Column="1" Grid.Row="5" Text="{Binding EditTabUnit.PowerOfLuminousIntensity, Mode=TwoWay}"  />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+                        <Button Text="Add" Command="{Binding AddUnitCommand}" />
+                        <Button Text="Modify" Grid.Column="1" Command="{Binding ModifyExistingUnitCommand}"/>
+                        <Button Text="Delete" Grid.Column="2" Command="{Binding DeleteUnitCommand}"/>
+                        <Button Text="Clear" Grid.Column="3" Command="{Binding ClearEditUnitCommand }"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <ListView x:Name="editUnitPossibleList" ItemsSource="{Binding EditTabPossibleUnits}" IsVisible="{Binding Path=IsFocused, Source={x:Reference editUnitInput}}">
+            </ListView>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
