@@ -625,8 +625,9 @@ namespace UnitConverterXamarin.Models
                         case '*': // to handle **, consider this as '^' (power)
                             if (operants.Count == nOperators && operators.Peek() == '*')
                             {
+                                c = '^';
                                 operators.Pop();
-                                operators.Push('^');
+                                nOperators--;
                             }
                             break;
                     }
