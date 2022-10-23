@@ -11,16 +11,16 @@
         <StaticResource Key="convViewModel"/>
     </ContentPage.BindingContext>
     
-    <!--<ContentPage.Resources>
+    <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="HorizontalTextAlignment" Value="End"/>
             <Setter Property="Padding" Value="5"/>
-            --><!--<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />--><!--
+            <!--<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />-->
         </Style>
-    </ContentPage.Resources>-->
+    </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout x:Name="mainAbsoluteLayout" SizeChanged="mainAbsoluteLayout_SizeChanged">
-            <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Always" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Default" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
                 <StackLayout>
                     <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
                         <Label Text="Select from Existing"/>
@@ -28,7 +28,7 @@
                         <Label Text="Unit Symbol" Grid.Row="2" />
                         <Label Text="Unit Name" Grid.Row="3" />
                         <Label Text="Expression" Grid.Row="4" />
-                        <Entry x:Name="editUnitInput" Grid.Column="1" Text="{Binding EditTabUnitStr}"/>
+                        <Entry x:Name="editUnitInput" Grid.Column="1" Text="{Binding EditTabUnitStr, Mode=TwoWay}" Focused="Entry_Focused"/>
                         <!--<StackLayout Grid.Column="1" Grid.Row="0"  >
                             <Entry x:Name="edit_Unit_Input" Text="{Binding EditTabUnitStr}" Focused="Edit_Unit_Input_FocusChanged" Unfocused="Edit_Unit_Input_FocusChanged"/>
                             <ListView x:Name="edit_Unit_Possible_List" ItemsSource="{Binding EditTabPossibleUnits}" ItemSelected="edit_Unit_Possible_List_ItemSelected" MaximumHeightRequest="150" VerticalScrollBarVisibility="Default" IsVisible="false">
@@ -76,7 +76,8 @@
                     </Grid>
                 </StackLayout>
             </ScrollView>
-            <ListView x:Name="editUnitPossibleList" ItemsSource="{Binding EditTabPossibleUnits}" IsVisible="{Binding Path=IsFocused, Source={x:Reference editUnitInput}}">
+            <ListView x:Name="editUnitPossibleList" ItemSelected="editUnitPossibleList_ItemSelected" Style="{StaticResource DropdownListStyle}"
+                      ItemsSource="{Binding EditTabPossibleUnits}" IsVisible="{Binding Path=IsFocused, Source={x:Reference editUnitInput}}">
             </ListView>
 
         </AbsoluteLayout>

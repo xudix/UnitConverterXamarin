@@ -127,6 +127,7 @@ namespace UnitConverterXamarin.ViewModels
                 {
                     // Update the PossibleUnits list by performing a search
                     editTabUnitStr = value;
+                    
                     EditTabPossibleUnits = SearchPossibleDisplayUnits(value);
                     UpdateUnitToEdit(model.FindUnit(value));
                 }
@@ -309,7 +310,8 @@ namespace UnitConverterXamarin.ViewModels
                             ConversionPossibleUnits = SearchPossibleDisplayUnits(inputUnitStr);
                         }
                         //else
-                            //MessageBox.Show(string.Format("Fail to add unit {0}. Unit {0} already exist.", EditTabUnit.UnitSymbol));
+                        //MessageBox.Show(string.Format("Fail to add unit {0}. Unit {0} already exist.", EditTabUnit.UnitSymbol));
+                        EditTabUnitStr = "";
                     }
                     catch (Exception ex)
                     {

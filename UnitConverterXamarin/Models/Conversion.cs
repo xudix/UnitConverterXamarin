@@ -615,12 +615,18 @@ namespace UnitConverterXamarin.Models
                             {
                                 if (c == '-')
                                 {
-
                                     operants.Push(minusOne);
                                     operators.Push('*');
                                     nOperators++;
                                 }
                                 continue;
+                            }
+                            break;
+                        case '*': // to handle **, consider this as '^' (power)
+                            if (operants.Count == nOperators && operators.Peek() == '*')
+                            {
+                                operators.Pop();
+                                operators.Push('^');
                             }
                             break;
                     }

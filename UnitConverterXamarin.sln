@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitConverterXamarin.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitConverterXamarin.iOS", "UnitConverterXamarin.iOS\UnitConverterXamarin.iOS.csproj", "{35DA3C93-4486-476E-AFE1-876DA0BED356}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitConverterXamarin", "UnitConverterXamarin\UnitConverterXamarin.csproj", "{93ACC40A-F0E0-437C-92A0-C156DEABCDD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitConverterXamarin", "UnitConverterXamarin\UnitConverterXamarin.csproj", "{93ACC40A-F0E0-437C-92A0-C156DEABCDD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

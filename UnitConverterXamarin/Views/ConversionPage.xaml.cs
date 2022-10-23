@@ -43,6 +43,13 @@ namespace UnitConverterXamarin.Views
                 viewModel.UpdateResultPrefix(picker.Parent.BindingContext as VariableWithUnit, selectedPrefix as string);
             }
         }
+
+        private void convPossibleUnitList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+                convUnitEntry.Text = (e.SelectedItem as Unit).ToString();
+            convUnitEntry.Unfocus();
+        }
     }
 
     

@@ -248,7 +248,7 @@
 		<PowerOfCurrent>0</PowerOfCurrent>
 		<PowerOfLuminousIntensity>0</PowerOfLuminousIntensity>
 		<UnitName>fluid ounce</UnitName>
-		<UnitSymbol>fl oz</UnitSymbol>
+		<UnitSymbol>floz</UnitSymbol>
 		<Multiplier>2.95735E-05</Multiplier>
 		<Offset>0</Offset>
 	</Unit>
@@ -1004,7 +1004,7 @@
 		<PowerOfCurrent>0</PowerOfCurrent>
 		<PowerOfLuminousIntensity>0</PowerOfLuminousIntensity>
 		<UnitName>ton (short)</UnitName>
-		<UnitSymbol>ton (short)</UnitSymbol>
+		<UnitSymbol>ton</UnitSymbol>
 		<Multiplier>907.1848</Multiplier>
 		<Offset>0</Offset>
 	</Unit>

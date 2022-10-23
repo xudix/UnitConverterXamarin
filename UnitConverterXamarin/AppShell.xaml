@@ -32,8 +32,8 @@
     <TabBar>
         <ShellContent Title="Convert" ContentTemplate="{DataTemplate views:ConversionPage}"/>
         <ShellContent Title="Edit/Add Unit" ContentTemplate="{DataTemplate views:EditUnitPage}"/>
-        <ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate views:AboutPage}" />
-        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate views:ItemsPage}" />
+        <!--<ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate views:AboutPage}" />
+        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate views:ItemsPage}" />-->
     </TabBar>
 
 

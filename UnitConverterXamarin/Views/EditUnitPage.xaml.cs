@@ -31,5 +31,12 @@ namespace UnitConverterXamarin.Views
         {
             AbsoluteLayout.SetLayoutBounds(editUnitPossibleList, new Rectangle(editUnitInput.X, editUnitInput.Y + editUnitInput.Height, editUnitInput.Width, 300));
         }
+
+        private void editUnitPossibleList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+                editUnitInput.Text = (e.SelectedItem as Unit).ToString();
+            editUnitInput.Unfocus();
+        }
     }
 }
